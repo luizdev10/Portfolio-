@@ -5,8 +5,7 @@ import Logo from "../components/ui/logo";
 const links = [
     { nome: "Início", url: "#home" },
     { nome: "Sobre", url: "#about" },
-    { nome: "Projetos", url: "#projects" },
-    { nome: "Habilidades", url: "#habilidades" },
+    { nome: "Projetos", url: "#projects" }
 ];
 
 export default function Navbar() {
