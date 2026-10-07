@@ -25,7 +25,7 @@ const projects = [
       "Site para estudio de tatuagem com galeria de trabalhos, agendamento e perfil do artista.",
     tags: ["HTML", "CSS", "JavaScript", "React", "Vite", "Tailwind"],
     link: "#",
-    github: "#",
+    github: "https://luizdev10.github.io/tattooProject/",
     accent: "#a78bfa",
   },
   {
@@ -35,7 +35,7 @@ const projects = [
       "Site para advocacia com galeria de trabalhos, agendamento e perfil do adv.",
     tags: ["HTML", "CSS", "JavaScript", "React", "Vite", "Tailwind"],
     link: "#",
-    github: "#",
+    github: "https://luizdev10.github.io/PROJETO-ADVOCACIA/",
     accent: "#a78bfa",
   },
   {
@@ -45,7 +45,17 @@ const projects = [
       "Landing page para pet shop com secao de servicos, aba para agendamento de consultas e botao de agendamento via WhatsApp.",
     tags: ["HTML", "CSS", "JavaScript", "Vite", "Tailwind", "React",],
     link: "#",
-    github: "#",
+    github: "https://luizdev10.github.io/Pet-Center/",
+    accent: "#fb923c",
+  },
+  {
+    id: "proj-Academia",
+    title: "Academia",
+    description:
+      "Landing page para Academia com secao de servicos, aba para agendamento de consultas e botao de agendamento via WhatsApp.",
+    tags: ["HTML", "CSS", "JavaScript", "Vite", "Tailwind", "React",],
+    link: "#",
+    github: "https://luizdev10.github.io/academia/",
     accent: "#fb923c",
   },
   {
