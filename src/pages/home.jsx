@@ -1,6 +1,25 @@
 import { ArrowDown, ArrowUpRight, HardDriveDownload } from "lucide-react";
+import OrbitalGalaxy from "../components/ui/galaxy.jsx";
+import { useState, useEffect } from "react";
 
 export default function Home() {
+  function useNarrow(query = "(max-width: 767px)") {
+    const [narrow, setNarrow] = useState(false);
+
+    useEffect(() => {
+      const mediaQuery = window.matchMedia(query);
+      const sync = () => setNarrow(mediaQuery.matches);
+
+      sync();
+      mediaQuery.addEventListener("change", sync);
+      return () => mediaQuery.removeEventListener("change", sync);
+    }, [query]);
+
+    return narrow;
+  }
+
+  const narrow = useNarrow();
+
   const codeLines = [
     <span key="open-idea" className="text-[#ff79c6]">&lt;ideia&gt;</span>,
     <span key="creativity" className="pl-4 text-[#f8f8f2]">
@@ -32,6 +51,24 @@ export default function Home() {
       id="home"
       className="relative isolate flex min-h-screen items-center overflow-hidden bg-black px-6 pb-20 pt-28 text-white sm:px-10 lg:px-20"
     >
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          right: 0,
+          bottom: 0,
+          left: 0,
+        }}
+      >
+        <OrbitalGalaxy
+          focus={narrow ? [0.5, 0.78] : [0.72, 0.44]}
+          scrim={narrow ? "top" : "left"}
+          scrimStrength={narrow ? 0.96 : 0.93}
+          viewRadius={narrow ? 2.2 : 3.2}
+          lead={narrow ? 0.04 : 0.1}
+          glow={narrow ? 0.55 : 1}
+        />
+      </div>
       <div
         className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
         aria-hidden="true"

@@ -1,4 +1,21 @@
 import { ArrowUpRight } from "lucide-react";
+import OrbitalGalaxy from "../components/ui/galaxy.jsx";
+import { useState, useEffect } from "react";
+
+function useNarrow(query = "(max-width: 767px)") {
+    const [narrow, setNarrow] = useState(false);
+
+    useEffect(() => {
+        const mediaQuery = window.matchMedia(query);
+        const sync = () => setNarrow(mediaQuery.matches);
+
+        sync();
+        mediaQuery.addEventListener("change", sync);
+        return () => mediaQuery.removeEventListener("change", sync);
+    }, [query]);
+
+    return narrow;
+}
 
 const skills = [
     {
@@ -122,13 +139,26 @@ const levelColors = {
 };
 
 export default function About() {
+    const narrow = useNarrow();
+
     return (
         <section
             id="about"
             aria-labelledby="about-title"
-            className="min-h-screen bg-black px-6 py-24 text-white sm:px-10 lg:px-20"
+            className="relative isolate min-h-screen overflow-hidden bg-black px-6 py-24 text-white sm:px-10 lg:px-20"
         >
-            <div className="mx-auto flex min-h-screen max-w-4xl flex-col justify-center">
+            <div className="absolute inset-0">
+                <OrbitalGalaxy
+                    focus={narrow ? [0.5, 0.78] : [0.72, 0.44]}
+                    scrim={narrow ? "top" : "left"}
+                    scrimStrength={narrow ? 0.96 : 0.93}
+                    viewRadius={narrow ? 2.2 : 3.2}
+                    lead={narrow ? 0.04 : 0.1}
+                    glow={narrow ? 0.55 : 1}
+                />
+            </div>
+
+            <div className="relative z-10 mx-auto flex min-h-screen max-w-4xl flex-col justify-center">
                 <p className="mb-4 text-xs uppercase tracking-[0.2em] text-white/40">
                     Um pouco sobre mim
                 </p>

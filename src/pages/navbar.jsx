@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { CodeXml, ChevronRight, X, Menu } from "lucide-react";
+import Logo from "../components/ui/logo";
 
 const links = [
     { nome: "Início", url: "#home" },
@@ -23,12 +24,7 @@ export default function Navbar() {
                     className="group flex items-center gap-3 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-[#bd93f9]"
                     onClick={() => setMenuAberto(false)}
                 >
-                    <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#bd93f9]/25 bg-[#bd93f9]/10 text-[#bd93f9] transition-colors group-hover:bg-[#bd93f9]/20">
-                        <CodeXml size={23} aria-hidden="true" />
-                    </span>
-                    <span className="font-['Inter'] text-lg font-semibold tracking-tight">
-                        luix<span className="text-[#bd93f9]">.dev</span>
-                    </span>
+                    <Logo />
                 </a>
 
                 <div className="flex items-center gap-5">
