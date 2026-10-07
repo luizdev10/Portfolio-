@@ -3,7 +3,8 @@ import { ArrowUpRight, Mail, MessageCircle, Send } from "lucide-react";
 import OrbitalGalaxy from "../components/ui/galaxy.jsx";
 
 
-const WHATSAPP_NUMBER = "5588988853140"; 
+const WHATSAPP_NUMBER = "5588988853140";
+const MENSAGE_WHATS = "Olá tudo bem? gostaria de criar um site com você.";
 const INSTAGRAM_USER = "";
 const EMAIL = "";
 
@@ -95,7 +96,7 @@ export default function Contact() {
     {
       name: "WhatsApp",
       detail: "Resposta mais rápida",
-      href: `https://wa.me/${WHATSAPP_NUMBER}`,
+      href: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(MENSAGE_WHATS)}`,
       icon: <MessageCircle size={20} aria-hidden="true" />,
       color: "#4ade80",
     },
@@ -128,7 +129,7 @@ export default function Contact() {
 
       <div className="relative z-10 mx-auto flex min-h-[calc(100vh-12rem)] max-w-6xl flex-col justify-center">
         <div className="grid items-start gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
-          {/* Coluna esquerda: texto + canais */}
+        
           <div>
             <p className="mb-4 text-xs uppercase tracking-[0.2em] text-white/40">
               Contato
@@ -241,8 +242,6 @@ export default function Contact() {
     })}
   </div>
 </fieldset>
-
-              
               {isOther && (
                 <div>
                   <label htmlFor="contact-other" className={labelClass}>

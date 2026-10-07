@@ -29,6 +29,16 @@ const projects = [
     accent: "#a78bfa",
   },
   {
+    id: "proj-advocacia",
+    title: "Advocacia",
+    description:
+      "Site para advocacia com galeria de trabalhos, agendamento e perfil do adv.",
+    tags: ["HTML", "CSS", "JavaScript", "React", "Vite", "Tailwind"],
+    link: "#",
+    github: "#",
+    accent: "#a78bfa",
+  },
+  {
     id: "proj-petshop",
     title: "Pet shop",
     description:
@@ -142,13 +152,13 @@ export default function Projects() {
                       <GitBranch size={14} />
                     </a>
 
-                    <a
+                    {/*<a
                       href={proj.link}
                       aria-label={"Ver " + proj.title + " ao vivo"}
                       className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 text-white/40 transition-colors hover:border-white/30 hover:text-white/80"
                     >
                       <ExternalLink size={14} />
-                    </a>
+                    </a>*/}
                   </div>
                 </div>
               </li>
