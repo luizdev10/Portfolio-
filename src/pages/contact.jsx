@@ -1,12 +1,12 @@
-﻿import { useEffect, useRef, useState } from "react";
-import { ArrowUpRight, Mail, MessageCircle, Send } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowUpRight, Check, Copy, Mail, MessageCircle, Send } from "lucide-react";
 import OrbitalGalaxy from "../components/ui/galaxy.jsx";
 
 
 const WHATSAPP_NUMBER = "5588988853140";
 const MENSAGE_WHATS = "Olá tudo bem? gostaria de criar um site com você.";
-const INSTAGRAM_USER = "";
-const EMAIL = "";
+const INSTAGRAM_USER = "luizdev2";
+const EMAIL = "luizxdeveloper@gmail.com";
 
 const OTHER = "Outro";
 const PROJECT_TYPES = [
@@ -50,6 +50,7 @@ export default function Contact() {
     message: "",
   });
   const [sent, setSent] = useState(false);
+  const [copied, setCopied] = useState(false);
   const [otherError, setOtherError] = useState("");
   const otherRef = useRef(null);
 
@@ -94,25 +95,31 @@ export default function Contact() {
 
   const channels = [
     {
+      id: "whatsapp",
       name: "WhatsApp",
       detail: "Resposta mais rápida",
       href: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(MENSAGE_WHATS)}`,
       icon: <MessageCircle size={20} aria-hidden="true" />,
       color: "#4ade80",
+      isExternal: true,
     },
     {
+      id: "instagram",
       name: "Instagram",
       detail: `@${INSTAGRAM_USER}`,
       href: `https://instagram.com/${INSTAGRAM_USER}`,
       icon: <InstagramIcon size={20} />,
       color: "#f472b6",
+      isExternal: true,
     },
     {
+      id: "email",
       name: "E-mail",
       detail: EMAIL,
-      href: `mailto:${EMAIL}`,
+      href: `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL}`,
       icon: <Mail size={20} aria-hidden="true" />,
       color: "#7dd3fc",
+      isExternal: true,
     },
   ];
 
@@ -154,8 +161,17 @@ export default function Contact() {
                 <li key={c.name}>
                   <a
                     href={c.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    target={c.isExternal ? "_blank" : undefined}
+                    rel={c.isExternal ? "noopener noreferrer" : undefined}
+                    onClick={() => {
+                      if (c.id === "email") {
+                        if (navigator.clipboard) {
+                          navigator.clipboard.writeText(EMAIL);
+                          setCopied(true);
+                          setTimeout(() => setCopied(false), 2500);
+                        }
+                      }
+                    }}
                     className="group flex items-center gap-4 rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 backdrop-blur-sm transition-all duration-300 hover:border-white/25 hover:bg-white/10"
                   >
                     <span
@@ -166,19 +182,34 @@ export default function Contact() {
                     </span>
 
                     <span className="min-w-0 flex-1">
-                      <span className="block text-sm font-semibold text-white">
+                      <span className="flex items-center gap-2 text-sm font-semibold text-white">
                         {c.name}
+                        {c.id === "email" && copied && (
+                          <span className="rounded-full bg-sky-500/20 px-2 py-0.5 text-[10px] font-medium text-sky-300 transition-all">
+                            Copiado!
+                          </span>
+                        )}
                       </span>
                       <span className="block truncate text-xs text-white/50">
                         {c.detail}
                       </span>
                     </span>
 
-                    <ArrowUpRight
-                      size={16}
-                      aria-hidden="true"
-                      className="shrink-0 text-white/30 transition-colors group-hover:text-white/80"
-                    />
+                    {c.id === "email" ? (
+                      <span className="flex items-center gap-1.5 text-xs text-white/40 group-hover:text-white/80 transition-colors">
+                        {copied ? (
+                          <Check size={16} className="text-emerald-400" />
+                        ) : (
+                          <Copy size={16} className="shrink-0 text-white/30 transition-colors group-hover:text-white/80" />
+                        )}
+                      </span>
+                    ) : (
+                      <ArrowUpRight
+                        size={16}
+                        aria-hidden="true"
+                        className="shrink-0 text-white/30 transition-colors group-hover:text-white/80"
+                      />
+                    )}
                   </a>
                 </li>
               ))}
