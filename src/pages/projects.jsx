@@ -22,7 +22,7 @@ const projects = [
     id: "proj-tatuador",
     title: "Studio Tattoo",
     description:
-      "Site para estudio de tatuagem com galeria de trabalhos, agendamento e perfil do artista.",
+      "Site para estúdio de tatuagem com galeria de trabalhos, agendamento e perfil do artista.",
     tags: ["HTML", "CSS", "JavaScript", "React", "Vite", "Tailwind"],
     link: "#",
     github: "https://luizdev10.github.io/tattooProject/",
@@ -62,7 +62,7 @@ const projects = [
     id: "proj-portfolio",
     title: "Este Portfolio",
     description:
-      "Portfolio pessoal construido com React e Tailwind CSS v4. Foco em acessibilidade e experiencia do usuario.",
+      "Portfolio pessoal construído com React e Tailwind CSS v4. Foco em acessibilidade e experiencia do usuario.",
     tags: ["React", "Tailwind", "Vite"],
     link: "#",
     github: "#",
@@ -116,7 +116,7 @@ export default function Projects() {
           </h2>
 
           <p className="mt-5 max-w-md text-sm leading-relaxed text-white/50">
-            Tres sites desenvolvidos do zero, cada um com desafios e
+            alguns sites desenvolvidos do zero, cada um com desafios e
             aprendizados proprios.
           </p>
 
@@ -156,6 +156,8 @@ export default function Projects() {
                   <div className="flex shrink-0 gap-2">
                     <a
                       href={proj.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       aria-label={"Codigo fonte de " + proj.title}
                       className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 text-white/40 transition-colors hover:border-white/30 hover:text-white/80"
                     >

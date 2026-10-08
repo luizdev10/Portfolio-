@@ -173,7 +173,7 @@ export default function About() {
                         </p>
 
                         <p>
-                            Desenvolvi três sites estáticos para diferentes segmentos.
+                            Desenvolvi alguns sites para diferentes segmentos.
                             Cada projeto ampliou minhas habilidades e me permitiu explorar
                             novas formas de criar experiências digitais.
                         </p>
