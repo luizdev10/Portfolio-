@@ -24,8 +24,8 @@ const projects = [
     description:
       "Site para estúdio de tatuagem com galeria de trabalhos, agendamento e perfil do artista.",
     tags: ["HTML", "CSS", "JavaScript", "React", "Vite", "Tailwind"],
-    link: "#",
-    github: "https://luizdev10.github.io/tattooProject/",
+    link: "https://luizdev10.github.io/tattooProject/",
+    github: "",
     accent: "#a78bfa",
   },
   {
@@ -34,9 +34,9 @@ const projects = [
     description:
       "Site para advocacia com galeria de trabalhos, agendamento e perfil do adv.",
     tags: ["HTML", "CSS", "JavaScript", "React", "Vite", "Tailwind"],
-    link: "#",
-    github: "https://luizdev10.github.io/PROJETO-ADVOCACIA/",
-    accent: "#a78bfa",
+    link: "#https://luizdev10.github.io/PROJETO-ADVOCACIA/",
+    github: "",
+    accent: "#fa844dff",
   },
   {
     id: "proj-petshop",
@@ -44,9 +44,9 @@ const projects = [
     description:
       "Landing page para pet shop com secao de servicos, aba para agendamento de consultas e botao de agendamento via WhatsApp.",
     tags: ["HTML", "CSS", "JavaScript", "Vite", "Tailwind", "React",],
-    link: "#",
-    github: "https://luizdev10.github.io/Pet-Center/",
-    accent: "#fb923c",
+    link: "https://luizdev10.github.io/Pet-Center/",
+    github: "",
+    accent: "#a2fb3cff",
   },
   {
     id: "proj-Academia",
@@ -54,8 +54,8 @@ const projects = [
     description:
       "Landing page para Academia com secao de servicos, aba para agendamento de consultas e botao de agendamento via WhatsApp.",
     tags: ["HTML", "CSS", "JavaScript", "Vite", "Tailwind", "React",],
-    link: "#",
-    github: "https://luizdev10.github.io/academia/",
+    link: "https://luizdev10.github.io/academia/",
+    github: "",
     accent: "#fb923c",
   },
   {
@@ -65,6 +65,7 @@ const projects = [
       "Portfolio pessoal construído com React e Tailwind CSS v4. Foco em acessibilidade e experiencia do usuario.",
     tags: ["React", "Tailwind", "Vite"],
     accent: "#5fd8ff",
+    github: "",
   },
 ];
 
@@ -152,15 +153,15 @@ export default function Projects() {
                   </div>
 
                   <div className="flex shrink-0 gap-2">
-                    {proj.github && (
+                    {proj.link && (
                       <a
-                        href={proj.github}
+                        href={proj.link}
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={"Código-fonte de " + proj.title}
                         className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 text-white/40 transition-colors hover:border-white/30 hover:text-white/80"
                       >
-                        <GitBranch size={14} />
+                        <ExternalLink size={14} />
                       </a>
                     )}
                   </div>
