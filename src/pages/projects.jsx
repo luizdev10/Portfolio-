@@ -64,8 +64,6 @@ const projects = [
     description:
       "Portfolio pessoal construído com React e Tailwind CSS v4. Foco em acessibilidade e experiencia do usuario.",
     tags: ["React", "Tailwind", "Vite"],
-    link: "#",
-    github: "#",
     accent: "#5fd8ff",
   },
 ];
@@ -121,7 +119,7 @@ export default function Projects() {
           </p>
 
           <ul className="mt-10 flex flex-col gap-4" aria-label="Lista de projetos">
-            {projects.map((proj) => (
+            {projects.map((proj, index) => (
               <li
                 key={proj.id}
                 id={proj.id}
@@ -154,23 +152,17 @@ export default function Projects() {
                   </div>
 
                   <div className="flex shrink-0 gap-2">
-                    <a
-                      href={proj.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={"Codigo fonte de " + proj.title}
-                      className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 text-white/40 transition-colors hover:border-white/30 hover:text-white/80"
-                    >
-                      <GitBranch size={14} />
-                    </a>
-
-                    {/*<a
-                      href={proj.link}
-                      aria-label={"Ver " + proj.title + " ao vivo"}
-                      className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 text-white/40 transition-colors hover:border-white/30 hover:text-white/80"
-                    >
-                      <ExternalLink size={14} />
-                    </a>*/}
+                    {proj.github && (
+                      <a
+                        href={proj.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={"Código-fonte de " + proj.title}
+                        className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 text-white/40 transition-colors hover:border-white/30 hover:text-white/80"
+                      >
+                        <GitBranch size={14} />
+                      </a>
+                    )}
                   </div>
                 </div>
               </li>
