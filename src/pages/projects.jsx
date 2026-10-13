@@ -34,7 +34,7 @@ const projects = [
     description:
       "Site para advocacia com galeria de trabalhos, agendamento e perfil do adv.",
     tags: ["HTML", "CSS", "JavaScript", "React", "Vite", "Tailwind"],
-    link: "#https://luizdev10.github.io/PROJETO-ADVOCACIA/",
+    link: "https://luizdev10.github.io/PROJETO-ADVOCACIA/",
     github: "",
     accent: "#fa844dff",
   },
