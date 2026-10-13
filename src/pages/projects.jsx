@@ -102,11 +102,13 @@ export default function Projects() {
         className="flex min-h-screen flex-col justify-center px-6 py-24 sm:px-10 lg:px-20"
       >
         <div className="max-w-2xl">
-          <p className="mb-4 text-xs uppercase tracking-[0.2em] text-white/40">
+          <p data-reveal className="mb-4 text-xs uppercase tracking-[0.2em] text-white/40">
             Projetos
           </p>
 
           <h2
+            data-reveal
+            style={{ "--reveal-delay": "100ms" }}
             id="projects-title"
             className="text-4xl font-light leading-[1.05] tracking-[-0.03em] text-white sm:text-5xl lg:text-[3.5rem]"
           >
@@ -114,7 +116,7 @@ export default function Projects() {
             <span className="block text-white/60">construido.</span>
           </h2>
 
-          <p className="mt-5 max-w-md text-sm leading-relaxed text-white/50">
+          <p data-reveal style={{ "--reveal-delay": "200ms" }} className="mt-5 max-w-md text-sm leading-relaxed text-white/50">
             alguns sites desenvolvidos do zero, cada um com desafios e
             aprendizados proprios.
           </p>
@@ -124,6 +126,8 @@ export default function Projects() {
               <li
                 key={proj.id}
                 id={proj.id}
+                data-reveal="left"
+                style={{ "--reveal-delay": `${index * 120}ms` }}
                 className="group rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm transition-all duration-300 hover:border-white/20"
               >
                 <div className="flex items-start justify-between gap-4">
@@ -171,6 +175,7 @@ export default function Projects() {
           </ul>
 
           <a
+            data-reveal
             href="#contact"
             className="mt-10 inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm text-white/70 transition-all hover:border-white/40 hover:text-white"
           >

@@ -92,7 +92,7 @@ export default function Home() {
 
       <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
         <div className="min-w-0">
-          <div className="mb-7 inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-2 text-[11px] font-medium uppercase tracking-[0.16em] text-white/60 backdrop-blur-sm sm:text-xs">
+          <div data-reveal className="mb-7 inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-2 text-[11px] font-medium uppercase tracking-[0.16em] text-white/60 backdrop-blur-sm sm:text-xs">
             <HardDriveDownload
               size={15}
               className="text-emerald-300"
@@ -101,19 +101,19 @@ export default function Home() {
             Disponível para aprender e colaborar
           </div>
 
-          <h1 className="max-w-3xl text-5xl font-light leading-[0.98] tracking-[-0.055em] sm:text-6xl lg:text-7xl">
+          <h1 data-reveal style={{ "--reveal-delay": "100ms" }} className="max-w-3xl text-5xl font-light leading-[0.98] tracking-[-0.055em] sm:text-6xl lg:text-7xl">
             Olá, eu sou
             <span className="mt-2 block bg-gradient-to-r from-white via-white to-white/45 bg-clip-text font-medium text-transparent text-hover">
               Luiz Henrique.
             </span>
           </h1>
 
-          <p className="mt-7 max-w-xl text-base leading-relaxed text-white/55 sm:text-lg">
+          <p data-reveal style={{ "--reveal-delay": "200ms" }} className="mt-7 max-w-xl text-base leading-relaxed text-white/55 sm:text-lg">
             Desenvolvedor web em evolução, transformando ideias em experiências
             digitais simples, acessíveis e feitas com cuidado.
           </p>
 
-          <div className="mt-9 flex flex-col gap-3 min-[440px]:flex-row">
+          <div data-reveal style={{ "--reveal-delay": "300ms" }} className="mt-9 flex flex-col gap-3 min-[440px]:flex-row">
             <a
               href="#projects"
               className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-black transition-colors hover:bg-white/85"
@@ -131,7 +131,7 @@ export default function Home() {
             </a>
           </div>
 
-          <p className="mt-8 flex items-center gap-2 text-xs text-white/35 sm:text-sm">
+          <p data-reveal style={{ "--reveal-delay": "400ms" }} className="mt-8 flex items-center gap-2 text-xs text-white/35 sm:text-sm">
             <span
               className="h-1.5 w-1.5 rounded-full bg-emerald-300"
               aria-hidden="true"
@@ -140,7 +140,7 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="relative mx-auto w-full max-w-xl">
+        <div data-reveal="right" style={{ "--reveal-delay": "250ms" }} className="relative mx-auto w-full max-w-xl">
           <div
             className="absolute -inset-5 rounded-[2rem] bg-gradient-to-br from-[#bd93f9]/15 via-transparent to-[#ff79c6]/10 blur-2xl"
             aria-hidden="true"

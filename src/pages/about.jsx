@@ -151,12 +151,14 @@ export default function About() {
             </div>
 
             <div className="relative z-10 mx-auto flex min-h-screen max-w-4xl flex-col justify-center">
-                <p className="mb-4 text-xs uppercase tracking-[0.2em] text-white/40">
+                <p data-reveal className="mb-4 text-xs uppercase tracking-[0.2em] text-white/40">
                     Um pouco sobre mim
                 </p>
 
                 <div>
                     <h2
+                        data-reveal
+                        style={{ "--reveal-delay": "100ms" }}
                         id="about-title"
                         className="max-w-3xl text-4xl font-light leading-[1.05] tracking-[-0.03em] sm:text-5xl lg:text-[3.5rem]"
                     >
@@ -166,7 +168,7 @@ export default function About() {
                         </span>
                     </h2>
 
-                    <div className="mt-5 grid max-w-3xl gap-5 text-sm leading-relaxed text-white/50 sm:grid-cols-2 sm:gap-8">
+                    <div data-reveal style={{ "--reveal-delay": "200ms" }} className="mt-5 grid max-w-3xl gap-5 text-sm leading-relaxed text-white/50 sm:grid-cols-2 sm:gap-8">
                         <p>
                             Crio sites claros, acessíveis e agradáveis de usar, combinando
                             atenção aos detalhes com soluções práticas para cada projeto.
@@ -180,19 +182,21 @@ export default function About() {
                     </div>
 
                     <div className="mt-10">
-                        <p className="mb-4 text-xs uppercase tracking-[0.2em] text-white/40">
+                        <p data-reveal className="mb-4 text-xs uppercase tracking-[0.2em] text-white/40">
                             Tecnologias
                         </p>
                         <ul
                             className="grid grid-cols-2 gap-3 sm:grid-cols-3"
                             aria-label="Lista de habilidades"
                         >
-                            {skills.map((skill) => {
+                            {skills.map((skill, index) => {
                                 const colors = levelColors[skill.level];
 
                                 return (
                                     <li
                                         key={skill.name}
+                                        data-reveal="scale"
+                                        style={{ "--reveal-delay": `${index * 80}ms` }}
                                         className="group flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur-sm transition-all duration-300 hover:border-white/20"
                                     >
                                         <span className="shrink-0">{skill.icon}</span>
@@ -218,6 +222,7 @@ export default function About() {
                     </div>
 
                     <a
+                        data-reveal
                         href="#projects"
                         className="mt-10 inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm text-white/70 transition-all hover:border-white/40 hover:text-white"
                     >

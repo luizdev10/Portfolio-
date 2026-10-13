@@ -193,11 +193,13 @@ export default function Contact() {
       <div className="relative z-10 mx-auto flex min-h-[calc(100vh-12rem)] max-w-6xl flex-col justify-center">
         <div className="grid items-start gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
           <div>
-            <p className="mb-4 text-xs uppercase tracking-[0.2em] text-white/40">
+            <p data-reveal className="mb-4 text-xs uppercase tracking-[0.2em] text-white/40">
               Contato
             </p>
 
             <h2
+              data-reveal
+              style={{ "--reveal-delay": "100ms" }}
               id="contact-title"
               className="text-4xl font-light leading-[1.05] tracking-[-0.03em] sm:text-5xl lg:text-[3.5rem]"
             >
@@ -205,7 +207,7 @@ export default function Contact() {
               <span className="block text-white/60">seu site?</span>
             </h2>
 
-            <p className="mt-5 max-w-md text-sm leading-relaxed text-white/50">
+            <p data-reveal style={{ "--reveal-delay": "200ms" }} className="mt-5 max-w-md text-sm leading-relaxed text-white/50">
               Tem uma ideia, um negócio ou um projeto pessoal que precisa de um
               lugar na web? Me conta o que você imagina e eu retorno o mais
               rápido possível para conversarmos.
@@ -215,7 +217,7 @@ export default function Contact() {
               className="mt-9 flex flex-col gap-3"
               aria-label="Canais de contato"
             >
-              {channels.map((c) => {
+              {channels.map((c, index) => {
                 const channelContent = (
                   <>
                     <span
@@ -264,7 +266,11 @@ export default function Contact() {
                 );
 
                 return (
-                  <li key={c.name}>
+                  <li
+                    key={c.name}
+                    data-reveal="left"
+                    style={{ "--reveal-delay": `${300 + index * 100}ms` }}
+                  >
                     {c.id === "email" ? (
                       <button
                         type="button"
@@ -299,7 +305,7 @@ export default function Contact() {
             )}
           </div>
 
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-md sm:p-8">
+          <div data-reveal="right" style={{ "--reveal-delay": "200ms" }} className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-md sm:p-8">
             <h3 className="text-lg font-medium text-white">
               Conte sobre o seu projeto
             </h3>
@@ -477,7 +483,7 @@ export default function Contact() {
           </div>
         </div>
 
-        <p className="mt-16 text-center text-xs text-white/30">
+        <p data-reveal className="mt-16 text-center text-xs text-white/30">
           © {new Date().getFullYear()} Luiz Henrique · Feito com React e Tailwind
         </p>
       </div>
