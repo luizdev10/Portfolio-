@@ -46,6 +46,8 @@ export function OrbitalGalaxy({
   const hostRef = useRef(null);
   const canvasRef = useRef(null);
   const props = useRef({});
+  // Mesmo motivo do OrbitalHeroSection: o loop de animação lê `props.current`
+  // a cada frame, para não precisar reiniciar o canvas quando as props mudam.
   props.current = { driftSpeed, starCount, paused };
 
   useEffect(() => {

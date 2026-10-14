@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { CodeXml, ChevronRight, X, Menu } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ChevronRight, X, Menu } from "lucide-react";
 import Logo from "../components/ui/logo";
 
 const links = [
@@ -9,11 +9,68 @@ const links = [
     { nome: "Contato", url: "#contact" },
 ];
 
+// Observa as seções da página para destacar, no menu, o link
+// correspondente ao que a pessoa está vendo no momento.
+function useActiveSection(ids) {
+    const [active, setActive] = useState(ids[0]);
+
+    useEffect(() => {
+        const sections = ids
+            .map((id) => document.getElementById(id))
+            .filter(Boolean);
+
+        if (sections.length === 0) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                const visible = entries
+                    .filter((entry) => entry.isIntersecting)
+                    .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+                if (visible) setActive(visible.target.id);
+            },
+            { rootMargin: "-45% 0px -45% 0px" }
+        );
+
+        sections.forEach((section) => observer.observe(section));
+        return () => observer.disconnect();
+    }, [ids]);
+
+    return active;
+}
+
 export default function Navbar() {
     const [menuAberto, setMenuAberto] = useState(false);
+    const menuRef = useRef(null);
+    const activeId = useActiveSection(links.map((item) => item.url.slice(1)));
+
+    useEffect(() => {
+        if (!menuAberto) return;
+
+        function onKeyDown(e) {
+            if (e.key === "Escape") setMenuAberto(false);
+        }
+
+        function onClickOutside(e) {
+            if (menuRef.current && !menuRef.current.contains(e.target)) {
+                setMenuAberto(false);
+            }
+        }
+
+        document.body.style.overflow = "hidden";
+        document.addEventListener("keydown", onKeyDown);
+        document.addEventListener("pointerdown", onClickOutside);
+
+        return () => {
+            document.body.style.overflow = "";
+            document.removeEventListener("keydown", onKeyDown);
+            document.removeEventListener("pointerdown", onClickOutside);
+        };
+    }, [menuAberto]);
 
     return (
         <nav
+            ref={menuRef}
             style={{ position: "fixed", top: 0, right: 0, left: 0, zIndex: 1000 }}
             className="w-full border-b border-white/10 bg-[#0b0b0f]/95 text-[#f8f8f2] shadow-lg shadow-black/10 backdrop-blur-xl"
         >
@@ -29,16 +86,31 @@ export default function Navbar() {
 
                 <div className="flex items-center gap-5">
                     <ul className="hidden items-center gap-1 md:flex">
-                        {links.map((item) => (
-                            <li key={item.url}>
-                                <a
-                                    href={item.url}
-                                    className="relative block rounded-full px-4 py-2 text-sm font-medium text-white/55 transition-colors hover:bg-white/5 hover:text-[#f8f8f2] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#bd93f9]"
-                                >
-                                    {item.nome}
-                                </a>
-                            </li>
-                        ))}
+                        {links.map((item) => {
+                            const isActive = activeId === item.url.slice(1);
+
+                            return (
+                                <li key={item.url}>
+                                    <a
+                                        href={item.url}
+                                        aria-current={isActive ? "page" : undefined}
+                                        className={`relative block rounded-full px-4 py-2 text-sm font-medium transition-colors hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#bd93f9] ${
+                                            isActive
+                                                ? "text-[#f8f8f2]"
+                                                : "text-white/55 hover:text-[#f8f8f2]"
+                                        }`}
+                                    >
+                                        {item.nome}
+                                        {isActive && (
+                                            <span
+                                                aria-hidden="true"
+                                                className="absolute inset-x-4 -bottom-[1px] h-px bg-[#bd93f9]"
+                                            />
+                                        )}
+                                    </a>
+                                </li>
+                            );
+                        })}
                     </ul>
 
                     <a
@@ -71,17 +143,24 @@ export default function Navbar() {
                     id="mobile-navigation"
                     className="absolute left-4 right-4 top-[calc(100%+0.5rem)] flex flex-col gap-1 rounded-2xl border border-white/10 bg-[#17171f]/95 p-2 shadow-2xl shadow-black/40 backdrop-blur-xl md:hidden"
                 >
-                    {links.map((item) => (
-                        <li key={item.url}>
-                            <a
-                                href={item.url}
-                                className="block rounded-xl px-4 py-3 text-sm font-medium text-white/65 transition-colors hover:bg-white/5 hover:text-[#f8f8f2] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#bd93f9]"
-                                onClick={() => setMenuAberto(false)}
-                            >
-                                {item.nome}
-                            </a>
-                        </li>
-                    ))}
+                    {links.map((item) => {
+                        const isActive = activeId === item.url.slice(1);
+
+                        return (
+                            <li key={item.url}>
+                                <a
+                                    href={item.url}
+                                    aria-current={isActive ? "page" : undefined}
+                                    className={`block rounded-xl px-4 py-3 text-sm font-medium transition-colors hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#bd93f9] ${
+                                        isActive ? "text-[#f8f8f2]" : "text-white/65 hover:text-[#f8f8f2]"
+                                    }`}
+                                    onClick={() => setMenuAberto(false)}
+                                >
+                                    {item.nome}
+                                </a>
+                            </li>
+                        );
+                    })}
                     <li className="mt-1 border-t border-white/10 pt-2">
                         <a
                             href="#contact"

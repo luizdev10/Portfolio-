@@ -10,6 +10,25 @@ html {
     scroll-behavior: auto;
   }
 }
+
+/* Compensa a altura do menu fixo ao navegar para uma âncora (#about, #projects...),
+   senão o início da seção fica escondido atrás do menu. */
+section[id] {
+  scroll-margin-top: 4.5rem;
+}
+
+/* Visível apenas ao navegar por teclado, para pular o menu e ir direto ao conteúdo. */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  z-index: 1100;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus-visible {
+  top: 1rem;
+}
 /* ---------- Animações de scroll ---------- */
 .reveal-ready [data-reveal] {
   opacity: 0;

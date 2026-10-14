@@ -1,21 +1,6 @@
-﻿import { useEffect, useState } from "react";
-import { OrbitalHeroSection } from "../components/ui/orbital-hero-section.jsx";
-import { ArrowUpRight, ExternalLink, GitBranch } from "lucide-react";
-
-function useNarrow(query = "(max-width: 767px)") {
-  const [narrow, setNarrow] = useState(false);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia(query);
-    const sync = () => setNarrow(mediaQuery.matches);
-
-    sync();
-    mediaQuery.addEventListener("change", sync);
-    return () => mediaQuery.removeEventListener("change", sync);
-  }, [query]);
-
-  return narrow;
-}
+﻿import { OrbitalHeroSection } from "../components/ui/orbital-hero-section.jsx";
+import { ArrowUpRight, ExternalLink } from "lucide-react";
+import useNarrow from "../hooks/useNarrow.js";
 
 const projects = [
   {
@@ -76,17 +61,9 @@ export default function Projects() {
     <section
       id="projects"
       aria-labelledby="projects-title"
-      style={{ minHeight: "100vh", position: "relative", background: "#000" }}
+      className="relative min-h-screen bg-black"
     >
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
-        }}
-      >
+      <div className="absolute inset-0">
         <OrbitalHeroSection
           focus={narrow ? [0.5, 0.78] : [0.72, 0.44]}
           scrim={narrow ? "top" : "left"}
@@ -97,10 +74,7 @@ export default function Projects() {
         />
       </div>
 
-      <div
-        style={{ position: "relative", zIndex: 10 }}
-        className="flex min-h-screen flex-col justify-center px-6 py-24 sm:px-10 lg:px-20"
-      >
+      <div className="relative z-10 flex min-h-screen flex-col justify-center px-6 py-24 sm:px-10 lg:px-20">
         <div className="max-w-2xl">
           <p data-reveal className="mb-4 text-xs uppercase tracking-[0.2em] text-white/40">
             Projetos

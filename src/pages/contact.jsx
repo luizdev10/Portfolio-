@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowUpRight, Check, Copy, Mail, MessageCircle, Send } from "lucide-react";
 import OrbitalGalaxy from "../components/ui/galaxy.jsx";
 
@@ -58,6 +58,7 @@ export default function Contact() {
   const messageRef = useRef(null);
 
   const isOther = form.type === OTHER;
+  const year = useMemo(() => new Date().getFullYear(), []);
 
   useEffect(() => {
     if (isOther) otherRef.current?.focus();
@@ -483,8 +484,8 @@ export default function Contact() {
           </div>
         </div>
 
-        <p data-reveal className="mt-16 text-center text-xs text-white/30">
-          © {new Date().getFullYear()} Luiz Henrique · Feito com React e Tailwind
+        <p data-reveal className="mt-16 text-center text-xs text-white/40">
+          © {year} Luiz Henrique · Feito com React e Tailwind
         </p>
       </div>
     </section>

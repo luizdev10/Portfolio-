@@ -1,23 +1,8 @@
 import { ArrowDown, ArrowUpRight, HardDriveDownload } from "lucide-react";
 import OrbitalGalaxy from "../components/ui/galaxy.jsx";
-import { useState, useEffect } from "react";
+import useNarrow from "../hooks/useNarrow.js";
 
 export default function Home() {
-  function useNarrow(query = "(max-width: 767px)") {
-    const [narrow, setNarrow] = useState(false);
-
-    useEffect(() => {
-      const mediaQuery = window.matchMedia(query);
-      const sync = () => setNarrow(mediaQuery.matches);
-
-      sync();
-      mediaQuery.addEventListener("change", sync);
-      return () => mediaQuery.removeEventListener("change", sync);
-    }, [query]);
-
-    return narrow;
-  }
-
   const narrow = useNarrow();
 
   const codeLines = [
@@ -51,15 +36,7 @@ export default function Home() {
       id="home"
       className="relative isolate flex min-h-screen items-center overflow-hidden bg-black px-6 pb-20 pt-28 text-white sm:px-10 lg:px-20"
     >
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
-        }}
-      >
+      <div className="absolute inset-0">
         <OrbitalGalaxy
           focus={narrow ? [0.5, 0.78] : [0.72, 0.44]}
           scrim={narrow ? "top" : "left"}

@@ -1,21 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import OrbitalGalaxy from "../components/ui/galaxy.jsx";
-import { useState, useEffect } from "react";
-
-function useNarrow(query = "(max-width: 767px)") {
-    const [narrow, setNarrow] = useState(false);
-
-    useEffect(() => {
-        const mediaQuery = window.matchMedia(query);
-        const sync = () => setNarrow(mediaQuery.matches);
-
-        sync();
-        mediaQuery.addEventListener("change", sync);
-        return () => mediaQuery.removeEventListener("change", sync);
-    }, [query]);
-
-    return narrow;
-}
+import useNarrow from "../hooks/useNarrow.js";
 
 const skills = [
     {
