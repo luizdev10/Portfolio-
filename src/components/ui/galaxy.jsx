@@ -18,7 +18,6 @@ export function OrbitalGalaxy({
   paused = false,
   className = "",
   children,
-  // props antigas são aceitas e ignoradas, para não quebrar quem já usa o componente
   yearSeconds,
   apex,
   viewRadius,
@@ -46,8 +45,6 @@ export function OrbitalGalaxy({
   const hostRef = useRef(null);
   const canvasRef = useRef(null);
   const props = useRef({});
-  // Mesmo motivo do OrbitalHeroSection: o loop de animação lê `props.current`
-  // a cada frame, para não precisar reiniciar o canvas quando as props mudam.
   props.current = { driftSpeed, starCount, paused };
 
   useEffect(() => {
@@ -61,8 +58,6 @@ export function OrbitalGalaxy({
       typeof window.matchMedia === "function" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // Celulares têm GPU/CPU mais fracas e tela com devicePixelRatio alto (2-3x),
-    // então aqui desenhamos menos estrelas, em menos pixels, e com menos frames por segundo.
     const isMobile =
       typeof window.matchMedia === "function" &&
       window.matchMedia("(max-width: 767px)").matches;
@@ -72,7 +67,6 @@ export function OrbitalGalaxy({
     let time = 0;
     let offset = 0;
 
-    // posições normalizadas (0 a 1) para cobrir a tela inteira
     let starN = 0;
     let sx = new Float32Array(0);
     let sy = new Float32Array(0);
@@ -96,7 +90,7 @@ export function OrbitalGalaxy({
       for (let k = 0; k < starN; k++) {
         sx[k] = rand();
         sy[k] = rand();
-        sz[k] = Math.pow(rand(), 2.2); // maioria pequena e fraca, poucas grandes
+        sz[k] = Math.pow(rand(), 2.2);
         sPhase[k] = rand() * Math.PI * 2;
         const t = rand();
         sTint[k] = t > 0.9 ? 1 : t < 0.08 ? 2 : 0;
@@ -127,8 +121,7 @@ export function OrbitalGalaxy({
 
       for (let s = 0; s < starN; s++) {
         const z = sz[s];
-        const layer = 0.25 + z * 1.2; // estrelas maiores se movem mais rápido
-        // movimento diagonal suave (esquerda e um pouco para baixo)
+        const layer = 0.25 + z * 1.2;
         const x = wrap(sx[s] - offset * layer) * width;
         const y = wrap(sy[s] + offset * layer * 0.45) * height;
 
@@ -160,8 +153,6 @@ export function OrbitalGalaxy({
         time += dt;
         offset += dt * 0.006 * props.current.driftSpeed;
       }
-      // No celular, desenha só a cada 2 frames (~30fps) — o movimento continua
-      // suave porque o tempo acima avança a cada frame real, só a pintura é mais rara.
       frame++;
       if (isMobile && frame % 2 !== 0) return;
       render();

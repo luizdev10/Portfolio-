@@ -3,6 +3,8 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -11,13 +13,14 @@ html {
   }
 }
 
-/* Compensa a altura do menu fixo ao navegar para uma âncora (#about, #projects...),
-   senão o início da seção fica escondido atrás do menu. */
+::-webkit-scrollbar {
+  display: none;
+}
+
 section[id] {
   scroll-margin-top: 4.5rem;
 }
 
-/* Visível apenas ao navegar por teclado, para pular o menu e ir direto ao conteúdo. */
 .skip-link {
   position: absolute;
   left: 1rem;
@@ -29,7 +32,7 @@ section[id] {
 .skip-link:focus-visible {
   top: 1rem;
 }
-/* ---------- Animações de scroll ---------- */
+
 .reveal-ready [data-reveal] {
   opacity: 0;
 }

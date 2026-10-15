@@ -1,7 +1,3 @@
-// Elementos orbitais dos planetas, usados pelo fundo animado em OrbitalHeroSection.
-// Fica num arquivo próprio (em vez de dentro do componente) para que o Fast Refresh
-// do Vite funcione corretamente — um arquivo que exporta componente e dados juntos
-// perde a atualização a quente.
 export const SOLAR_SYSTEM = [
   { name: "Mercury", a: 0.38710, e: 0.20563, i: 7.005, node: 48.331, peri: 29.125, M0: 174.796, color: "#fff0d0", size: 2.2 },
   { name: "Venus",   a: 0.72333, e: 0.00677, i: 3.395, node: 76.680, peri: 54.853, M0: 50.115,  color: "#ffc65a", size: 3.4 },

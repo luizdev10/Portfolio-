@@ -124,7 +124,6 @@ export default function Contact() {
         copySucceeded = true;
       }
     } catch {
-      // Tenta o método alternativo se o navegador bloquear a cópia.
     }
 
     if (!copySucceeded) {

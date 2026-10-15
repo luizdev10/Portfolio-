@@ -79,9 +79,6 @@ export function OrbitalHeroSection({
   const hostRef = useRef(null);
   const canvasRef = useRef(null);
   const props = useRef({});
-  // Grava as props mais recentes num ref a cada render, de propósito: o loop de
-  // animação (dentro do único useEffect abaixo, que nunca reexecuta) lê `props.current`
-  // em cada frame, assim a troca de props não reinicia o canvas nem o requestAnimationFrame.
   props.current = {
     planets, yearSeconds, trailYears, compress, maxTurns, planeSpread, eccentricity,
     alignToCourse, driftSpeed, apex, viewRadius, tilt, spin, roll, lead, focus,
@@ -100,9 +97,6 @@ export function OrbitalHeroSection({
       typeof window.matchMedia === "function" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // Celulares têm GPU/CPU mais fracas e tela com devicePixelRatio alto (2-3x), e essa
-    // cena já é a mais cara da página (órbita de 8 planetas recalculada todo frame),
-    // então aqui desenhamos menos estrelas e traçados, em menos pixels e menos fps.
     const isMobile =
       typeof window.matchMedia === "function" &&
       window.matchMedia("(max-width: 767px)").matches;
@@ -150,7 +144,6 @@ export function OrbitalHeroSection({
       DIR.z = Math.sin(B);
     }
 
-    // ---------- órbitas ----------
     function swingToCourse(nx, ny, nz, align) {
       const s = nx * DIR.x + ny * DIR.y + nz * DIR.z >= 0 ? 1 : -1;
       let tx = nx + align * (s * DIR.x - nx);
@@ -226,7 +219,6 @@ export function OrbitalHeroSection({
       );
     }
 
-    // ---------- estrelas (campo 2D que cobre a tela inteira) ----------
     let starN = 0;
     let sx = new Float32Array(0), sy = new Float32Array(0), sz = new Float32Array(0);
     let sPhase = new Float32Array(0);
@@ -277,7 +269,6 @@ export function OrbitalHeroSection({
       ctx.globalCompositeOperation = "source-over";
     }
 
-    // ---------- brilho dos planetas ----------
     const glowCache = new Map();
     function glowSprite(color) {
       const hit = glowCache.get(color);
@@ -298,7 +289,6 @@ export function OrbitalHeroSection({
       return c;
     }
 
-    // ---------- layout / resize ----------
     function layout() {
       const C = props.current;
       pxPerAU = (Math.min(width, height) * 0.5) / C.viewRadius;
@@ -321,7 +311,6 @@ export function OrbitalHeroSection({
       buildStars();
     }
 
-    // ---------- interação (desligada por padrão) ----------
     let pointerX = 0, pointerY = 0, camX = 0, camY = 0;
     function onPointer(ev) {
       if (!props.current.interactive) return;
@@ -331,7 +320,6 @@ export function OrbitalHeroSection({
     }
     function onLeave() { pointerX = 0; pointerY = 0; }
 
-    // ---------- Sol ----------
     function drawSun(k, t) {
       const [r, g, b] = parseRGB(props.current.sunColor);
       const pulse = 1 + Math.sin(t * 2.1) * 0.02;
@@ -364,7 +352,6 @@ export function OrbitalHeroSection({
       ctx.beginPath(); ctx.arc(cx, cy, R, 0, TAU); ctx.fill();
     }
 
-    // ---------- render ----------
     function render(t) {
       const C = props.current, k = C.glow;
       layout();
@@ -389,7 +376,6 @@ export function OrbitalHeroSection({
       ctx.fillRect(0, 0, width, height);
       ctx.globalCompositeOperation = "lighter";
 
-      // rastro do Sol
       if (C.showSunTrack) {
         const back = C.driftSpeed * C.trailYears * 1.1;
         project(0, 0, 0);
@@ -409,7 +395,6 @@ export function OrbitalHeroSection({
         }
       }
 
-      // órbitas
       if (C.showOrbits) {
         for (const el of elems) {
           const [r, g, b] = el.rgb;
@@ -427,7 +412,6 @@ export function OrbitalHeroSection({
         }
       }
 
-      // trilhas dos planetas
       const shots = [];
       for (const el of elems) {
         const [r, g, b] = el.rgb;
@@ -473,7 +457,6 @@ export function OrbitalHeroSection({
         }
       }
 
-      // planetas e Sol (ordenados por profundidade)
       shots.sort((p, q) => q.depth - p.depth);
       const ss = Math.min(width, height) / 660;
       const drawShot = (o) => {
@@ -492,7 +475,6 @@ export function OrbitalHeroSection({
       drawSun(k, t);
       while (idx < shots.length) drawShot(shots[idx++]);
 
-      // degradê escuro para leitura do texto
       ctx.globalCompositeOperation = "source-over";
       if (C.scrim !== "none") {
         const s = Math.max(0, Math.min(1, C.scrimStrength));
@@ -509,7 +491,6 @@ export function OrbitalHeroSection({
         ctx.fillRect(0, 0, width, height);
       }
 
-      // estrelas por cima do degradê, para aparecerem na tela inteira
       drawStars();
     }
 
@@ -524,8 +505,6 @@ export function OrbitalHeroSection({
         secs += dt;
         starOffset += dt * 0.006 * props.current.driftSpeed;
       }
-      // No celular, desenha só a cada 2 frames (~30fps) — o tempo acima avança a cada
-      // frame real, então o movimento continua suave, só a pintura é mais rara.
       frame++;
       if (isMobile && frame % 2 !== 0) return;
       render(years);

@@ -9,8 +9,6 @@ const links = [
     { nome: "Contato", url: "#contact" },
 ];
 
-// Observa as seções da página para destacar, no menu, o link
-// correspondente ao que a pessoa está vendo no momento.
 function useActiveSection(ids) {
     const [active, setActive] = useState(ids[0]);
 

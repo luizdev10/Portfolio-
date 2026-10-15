@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 
-// Usado pelas seções com fundo animado para ajustar foco/zoom da cena
-// conforme a tela é estreita (celular) ou larga (desktop).
 export default function useNarrow(query = "(max-width: 767px)") {
   const [narrow, setNarrow] = useState(false);
 
