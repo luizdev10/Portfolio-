@@ -72,7 +72,7 @@ export default function Navbar() {
         <nav
             ref={menuRef}
             style={{ position: "fixed", top: 0, right: 0, left: 0, zIndex: 1000 }}
-            className="w-full border-b border-white/10 bg-[#0b0b0f]/95 text-[#f8f8f2] shadow-lg shadow-black/10 backdrop-blur-xl"
+            className="w-full border-b border-white/10 bg-[#0b0b0f]/95 text-[#f8f8f2] shadow-lg shadow-black/10"
         >
             <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 sm:px-8 lg:px-12">
                 <a
@@ -141,7 +141,7 @@ export default function Navbar() {
             {menuAberto && (
                 <ul
                     id="mobile-navigation"
-                    className="absolute left-4 right-4 top-[calc(100%+0.5rem)] flex flex-col gap-1 rounded-2xl border border-white/10 bg-[#17171f]/95 p-2 shadow-2xl shadow-black/40 backdrop-blur-xl md:hidden"
+                    className="absolute left-4 right-4 top-[calc(100%+0.5rem)] flex flex-col gap-1 rounded-2xl border border-white/10 bg-[#17171f]/95 p-2 shadow-2xl shadow-black/40 md:hidden"
                 >
                     {links.map((item) => {
                         const isActive = activeId === item.url.slice(1);

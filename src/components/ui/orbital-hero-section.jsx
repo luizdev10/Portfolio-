@@ -100,10 +100,17 @@ export function OrbitalHeroSection({
       typeof window.matchMedia === "function" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+    // Celulares têm GPU/CPU mais fracas e tela com devicePixelRatio alto (2-3x), e essa
+    // cena já é a mais cara da página (órbita de 8 planetas recalculada todo frame),
+    // então aqui desenhamos menos estrelas e traçados, em menos pixels e menos fps.
+    const isMobile =
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(max-width: 767px)").matches;
+
     let width = 0, height = 0, dpr = 1;
     let years = reduced ? 1.7 : 0;
     let secs = 0, starOffset = 0;
-    let lastFrame = 0, running = true, visible = true, raf = 0;
+    let lastFrame = 0, running = true, visible = true, raf = 0, frame = 0;
     let pxPerAU = 1, cx = 0, cy = 0, camDist = 1;
 
     const RIGHT = { x: 1, y: 0, z: 0 };
@@ -228,7 +235,8 @@ export function OrbitalHeroSection({
     function buildStars() {
       const rand = mulberry32(0xc0ffee);
       const area = (width * height) / (1440 * 900);
-      starN = Math.max(120, Math.min(3000, Math.round(props.current.starCount * area)));
+      const density = isMobile ? 0.6 : 1;
+      starN = Math.max(120, Math.min(3000, Math.round(props.current.starCount * area * density)));
       sx = new Float32Array(starN);
       sy = new Float32Array(starN);
       sz = new Float32Array(starN);
@@ -302,7 +310,7 @@ export function OrbitalHeroSection({
     function resize() {
       const rect = host.getBoundingClientRect();
       const w = Math.max(1, rect.width), h = Math.max(1, rect.height);
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1 : 2);
       if (w === width && h === height) return;
       width = w;
       height = h;
@@ -426,7 +434,7 @@ export function OrbitalHeroSection({
         const bright = (el.p.glow ?? 1) * k;
         const span = Math.min(C.trailYears, C.maxTurns * el.period);
         const turns = span / el.period;
-        const N = Math.max(48, Math.min(360, Math.ceil(turns * 46 * (1 + 2.2 * el.e)) + 48));
+        const N = Math.max(48, Math.min(isMobile ? 160 : 360, Math.ceil(turns * 46 * (1 + 2.2 * el.e)) + 48));
         const xs = new Float64Array(N + 1), ys = new Float64Array(N + 1);
         const okArr = new Uint8Array(N + 1);
 
@@ -516,6 +524,10 @@ export function OrbitalHeroSection({
         secs += dt;
         starOffset += dt * 0.006 * props.current.driftSpeed;
       }
+      // No celular, desenha só a cada 2 frames (~30fps) — o tempo acima avança a cada
+      // frame real, então o movimento continua suave, só a pintura é mais rara.
+      frame++;
+      if (isMobile && frame % 2 !== 0) return;
       render(years);
     }
 

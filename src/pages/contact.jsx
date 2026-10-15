@@ -36,7 +36,7 @@ function InstagramIcon({ size = 20 }) {
 }
 
 const inputClass =
-  "w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none backdrop-blur-sm transition-colors focus:border-white/35";
+  "w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none sm:backdrop-blur-sm transition-colors focus:border-white/35";
 
 const labelClass =
   "mb-1.5 block text-xs uppercase tracking-[0.14em] text-white/45";
@@ -279,7 +279,7 @@ export default function Contact() {
                         aria-label={
                           copied ? "E-mail copiado" : `Copiar e-mail ${EMAIL}`
                         }
-                        className="group flex w-full items-center gap-4 rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-left backdrop-blur-sm transition-all duration-300 hover:border-white/25 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+                        className="group flex w-full items-center gap-4 rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-left sm:backdrop-blur-sm transition-all duration-300 hover:border-white/25 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
                       >
                         {channelContent}
                       </button>
@@ -288,7 +288,7 @@ export default function Contact() {
                         href={c.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group flex items-center gap-4 rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 backdrop-blur-sm transition-all duration-300 hover:border-white/25 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+                        className="group flex items-center gap-4 rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 sm:backdrop-blur-sm transition-all duration-300 hover:border-white/25 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
                       >
                         {channelContent}
                       </a>
@@ -306,7 +306,7 @@ export default function Contact() {
             )}
           </div>
 
-          <div data-reveal="right" style={{ "--reveal-delay": "200ms" }} className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-md sm:p-8">
+          <div data-reveal="right" style={{ "--reveal-delay": "200ms" }} className="rounded-3xl border border-white/10 bg-white/5 p-6 sm:backdrop-blur-md sm:p-8">
             <h3 className="text-lg font-medium text-white">
               Conte sobre o seu projeto
             </h3>

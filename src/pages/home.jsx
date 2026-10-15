@@ -69,7 +69,7 @@ export default function Home() {
 
       <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
         <div className="min-w-0">
-          <div data-reveal className="mb-7 inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-2 text-[11px] font-medium uppercase tracking-[0.16em] text-white/60 backdrop-blur-sm sm:text-xs">
+          <div data-reveal className="mb-7 inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-2 text-[11px] font-medium uppercase tracking-[0.16em] text-white/60 sm:backdrop-blur-sm sm:text-xs">
             <HardDriveDownload
               size={15}
               className="text-emerald-300"
@@ -123,7 +123,7 @@ export default function Home() {
             aria-hidden="true"
           />
 
-          <div className="relative rotate-[-1deg] overflow-hidden rounded-2xl border border-[#bd93f9]/20 bg-[#282a36] text-[#f8f8f2] shadow-2xl shadow-[#bd93f9]/10 backdrop-blur-xl transition-transform duration-500 hover:rotate-0">
+          <div className="relative rotate-[-1deg] overflow-hidden rounded-2xl border border-[#bd93f9]/20 bg-[#282a36] text-[#f8f8f2] shadow-2xl shadow-[#bd93f9]/10 transition-transform duration-500 hover:rotate-0">
             <div className="flex items-center gap-3 border-b border-[#44475a] bg-[#21222c] px-5 py-4">
               <div className="flex gap-1.5" aria-hidden="true">
                 <span className="h-2.5 w-2.5 rounded-full bg-[#ff5555]" />

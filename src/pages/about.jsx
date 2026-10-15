@@ -182,7 +182,7 @@ export default function About() {
                                         key={skill.name}
                                         data-reveal="scale"
                                         style={{ "--reveal-delay": `${index * 80}ms` }}
-                                        className="group flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur-sm transition-all duration-300 hover:border-white/20"
+                                        className="group flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 sm:backdrop-blur-sm transition-all duration-300 hover:border-white/20"
                                     >
                                         <span className="shrink-0">{skill.icon}</span>
 

@@ -102,7 +102,7 @@ export default function Projects() {
                 id={proj.id}
                 data-reveal="left"
                 style={{ "--reveal-delay": `${index * 120}ms` }}
-                className="group rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm transition-all duration-300 hover:border-white/20"
+                className="group rounded-2xl border border-white/10 bg-white/5 p-5 sm:backdrop-blur-sm transition-all duration-300 hover:border-white/20"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="min-w-0 flex-1">

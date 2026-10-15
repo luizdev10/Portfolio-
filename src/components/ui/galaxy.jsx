@@ -61,8 +61,14 @@ export function OrbitalGalaxy({
       typeof window.matchMedia === "function" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+    // Celulares têm GPU/CPU mais fracas e tela com devicePixelRatio alto (2-3x),
+    // então aqui desenhamos menos estrelas, em menos pixels, e com menos frames por segundo.
+    const isMobile =
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(max-width: 767px)").matches;
+
     let width = 0, height = 0, dpr = 1;
-    let running = true, visible = true, raf = 0, lastFrame = 0;
+    let running = true, visible = true, raf = 0, lastFrame = 0, frame = 0;
     let time = 0;
     let offset = 0;
 
@@ -77,9 +83,10 @@ export function OrbitalGalaxy({
     function buildStars() {
       const rand = mulberry32(0xc0ffee);
       const area = (width * height) / (1440 * 900);
+      const density = isMobile ? 0.6 : 1;
       starN = Math.max(
         120,
-        Math.min(3000, Math.round(props.current.starCount * area))
+        Math.min(3000, Math.round(props.current.starCount * area * density))
       );
       sx = new Float32Array(starN);
       sy = new Float32Array(starN);
@@ -100,7 +107,7 @@ export function OrbitalGalaxy({
       const rect = host.getBoundingClientRect();
       const w = Math.max(1, rect.width);
       const h = Math.max(1, rect.height);
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1 : 2);
       if (w === width && h === height) return;
       width = w;
       height = h;
@@ -153,6 +160,10 @@ export function OrbitalGalaxy({
         time += dt;
         offset += dt * 0.006 * props.current.driftSpeed;
       }
+      // No celular, desenha só a cada 2 frames (~30fps) — o movimento continua
+      // suave porque o tempo acima avança a cada frame real, só a pintura é mais rara.
+      frame++;
+      if (isMobile && frame % 2 !== 0) return;
       render();
     }
 
