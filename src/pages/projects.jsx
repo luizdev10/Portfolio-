@@ -29,7 +29,7 @@ const projects = [
     description:
       "Landing page para pet shop com secao de servicos, aba para agendamento de consultas e botao de agendamento via WhatsApp.",
     tags: ["HTML", "CSS", "JavaScript", "Vite", "Tailwind", "React",],
-    link: "https://luizdev10.github.io/Pet-Center/",
+    link: "https://luizdev10.github.io/petshop-site/",
     github: "",
     accent: "#a2fb3cff",
   },
